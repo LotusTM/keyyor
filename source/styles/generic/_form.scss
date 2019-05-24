@@ -1,0 +1,77 @@
+
+// =============================================================================
+// ^FORMS
+// =============================================================================
+
+input,
+textarea,
+select,
+#{$ekzo-g-ns}input {
+  @include ekzo-theme() {
+    border-color: ekzo-theme(forms-border);
+    background-color: #fefefe;
+  }
+
+  border-width: 1px;
+  border-radius: 3px;
+
+  padding: ekzo-space(.5);
+
+  // stylelint-disable-next-line selector-max-type
+  &:disabled { background-color: #f0f3f7; }
+
+  // Disable default red borders in Firefox
+  // stylelint-disable-next-line selector-max-type
+  &:required { box-shadow: none; }
+
+}
+
+.Input- {
+  padding: ekzo-space(.25);
+
+  &::placeholder {
+    font-size: ekzo-font-size('-');
+  }
+}
+
+.Input--hollow {
+  @extend .h-trans--all;
+
+  @include ekzo-font-size(h4, headings);
+
+  color: ekzo-color('ivory');
+  background-color: transparent;
+  text-align: center;
+
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(#fff, .7);
+  border-radius: 2px;
+
+  outline: 0;
+
+  &:not(:disabled) {
+
+    &:focus { background-color: rgba(ekzo-color('ivory'), .2); }
+
+  }
+
+  &::placeholder {
+    @include ekzo-font-size(\+);
+
+    color: rgba(ekzo-color('ivory'), .7);
+  }
+}
+
+// Remove spin controls from number inputs
+[type='number'] {
+  // stylelint-disable-next-line property-no-vendor-prefix
+  -moz-appearance: textfield;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    // stylelint-disable-next-line property-no-vendor-prefix
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+}

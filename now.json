@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "scope": "2bad",
+  "name": "keyyor",
+  "alias": ["keyyor.2bad.now.sh"],
+  "builds": [
+    { "src": "build/**/*", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "^/(.*\\..*)", "dest": "/build/$1" },
+    { "src": "^/.*", "dest": "/build/index.html" }
+  ]
+}

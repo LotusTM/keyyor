@@ -1,0 +1,133 @@
+{{ initPage() }}
+
+{% from '_components/analytics/_GoogleGlobalTag.nj' import GoogleGlobalTag with context %}
+{% from '_components/analytics/_YandexMetrika.nj' import YandexMetrika with context %}
+{% from '_components/_AlternateUrls.nj' import AlternateUrls with context %}
+{% from '_components/_IE.nj' import IE with context %}
+{% from '_components/_OutdatedBrowser.nj' import OutdatedBrowser with context %}
+
+<!doctype html>
+<html class='{{ PAGE.class }} t-base no-js' lang='{{ PAGE.locale }}' {{ 'dir=\'rtl\'' if PAGE.rtl }} vocab='https://schema.org/'>
+
+<head>
+
+  <meta charset='utf-8'>
+
+  <!-- IE compatibility -->
+  <meta http-equiv='x-ua-compatible' content='ie=edge'>
+
+  <!-- Meta -->
+  <title>{{ PAGE.title or SITE.name }}</title>
+  <meta name='description' content='{{ PAGE.description }}'>
+
+  <!-- Viewport -->
+  <meta name='viewport' content='{{ PAGE.viewport or SITE.viewport }}'>
+
+  <!-- Fonts -->
+  {% block fonts %}
+  {# @note Also `Proxima Nova` used, which is declared in `/source/styles/settings/_typography.scss` #}
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Unica+One'>
+  {% endblock %}
+
+  <!-- CSS -->
+  {% block css %}
+  <link rel='stylesheet' href='{{ urljoin('/', PATH.styles, 'style.min.css' if ENV.build else 'style.prefixed.css') }}'>
+  {% endblock %}
+
+  <!-- Manifest -->
+  <link rel='manifest' href='/manifest.json'>
+  <meta name='apple-mobile-web-app-title' content='{{ SITE.name }}'>
+  <meta name='application-name' content='{{ SITE.name }}'>
+
+  <!-- Icons -->
+  <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png'>
+  <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png'>
+  <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png'>
+  <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#49d29b'>
+
+
+  {# <!-- RSS -->
+  <link rel='alternate' type='application/rss+xml' title='RSS' href='/rss.xml'> #}
+
+  <!-- Theme -->
+  <meta name='theme-color' content='{{ PAGE.themeColor or SITE.themeColor }}'>
+
+  <!-- RDFa -->
+  <meta typeof='WebSite' resource='#this-website'>
+  <meta about='#this-website' property='name' content='{{ SITE.name }}'>
+  <link about='#this-website' property='url' href='{{ SITE.homepage }}'>
+
+  <meta typeof='Organization' resource='#this'>
+  <meta about='#this' property='name' content='{{ SITE.name }}'>
+  <meta about='#this' property='logo' content='{{ absoluteurl(SITE.logo) }}'>
+  <link about='#this' property='url' href='{{ urljoin(SITE.homepage, localeDir()) }}'>
+  {% for service, props in SOCIAL %}
+  {% if props.url %}
+  <link about='#this' property='sameAs' href='{{ props.url }}'>
+  {% endif %}
+  {% endfor %}
+
+  <!-- Open Graph -->
+  <meta property='og:type'        content='{{ PAGE.og.type or 'website' }}'>
+  <meta property='og:site_name'   content='{{ PAGE.og.site_name or SITE.name }}'>
+  <meta property='og:url'         content='{{ absoluteurl(PAGE.og.url or (localeDir() if PAGE.url == '/' else urljoin(localeDir(), PAGE.url))) }}'>
+  <meta property='og:title'       content='{{ PAGE.og.title or PAGE.title or SITE.name }}'>
+  <meta property='og:description' content='{{ PAGE.og.description or PAGE.description or SITE.description }}'>
+  <meta property='og:image'       content='{{ absoluteurl(PAGE.og.image or PAGE.image or SOCIAL.facebook.image) }}'>
+  <meta property='og:locale'      content='{{ PAGE.og.locale or PAGE.isoLocale }}'>
+  {% for locale in _.union(_.keys(SITE.locales), PAGE.og['locale:alternate']) %}
+  <meta property='og:locale:alternate' content='{{ locale|isoLocale }}'>
+  {% endfor %}
+
+  <!-- Twitter Card -->
+  <meta name='twitter:card'        content='{{ PAGE.twitter.card or 'summary' }}'>
+  <meta name='twitter:site'        content='{{ PAGE.twitter.site or SOCIAL.twitter.handle }}'>
+  <meta name='twitter:creator'     content='{{ PAGE.twitter.creator or SOCIAL.twitter.handle }}'>
+  <meta name='twitter:url'         content='{{ absoluteurl(PAGE.twitter.url or (localeDir() if PAGE.url == '/' else urljoin(localeDir(), PAGE.url))) }}'>
+  <meta name='twitter:title'       content='{{ PAGE.twitter.title or PAGE.title or SITE.name }}'>
+  <meta name='twitter:description' content='{{ PAGE.twitter.description or PAGE.description or SITE.description }}'>
+  <meta name='twitter:image'       content='{{ absoluteurl(PAGE.twitter.image or PAGE.image or SOCIAL.twitter.image) }}'>
+  <meta name='twitter:image:alt'   content='{{ PAGE.twitter['image:alt'] or PAGE.title or SITE.name }}'>
+
+  <!-- Alternate urls -->
+  {% for locale, props in SITE.locales %}
+  {{ AlternateUrls(props.locale, defaultForLanguage = props.defaultForLanguage) }}
+  {% endfor %}
+  {% for props in PAGE.alternate %}
+  {{ AlternateUrls(props.locale, props.url, props.defaultForLanguage) }}
+  {% endfor %}
+
+  <!-- Canonical url -->
+  {% if PAGE.canonical != false %}
+  <link rel='canonical' href='{{ absoluteurl(PAGE.canonical or (localeDir() if PAGE.url == '/' else urljoin(localeDir(), PAGE.url))) }}'>
+  {% endif %}
+
+  <!-- Authors -->
+  <link rel='author' href='/humans.txt'>
+
+  {{ IE(version = 'lte IE 9') }}
+
+</head>
+
+<body class='{{ PAGE.bodyClass }} Layout-container'>
+
+  {{ OutdatedBrowser(version = 'lte IE 9') }}
+
+  {% block body %}{% endblock %}
+
+  <!-- Scripts -->
+  <!-- ======= -->
+
+  {% block js %}
+  <script src='https://polyfill.io/v3/polyfill.min.js?features=fetch%2CPromise.prototype.finally'></script>
+  <script src='{{ urljoin('\/', PATH.file.script.runtime) }}'></script>
+  <script src='{{ urljoin('\/', PATH.file.script.main) }}'></script>
+  <script src='{{ urljoin('\/', PATH.file.script.externals) }}'></script>
+  {% endblock %}
+
+  {{ GoogleGlobalTag(UAId = SITE.googleAnalyticsId) if SITE.googleAnalyticsId }}
+  {{ YandexMetrika(counterId = SITE.yandexMetrikaId) if SITE.yandexMetrikaId }}
+
+</body>
+
+</html>

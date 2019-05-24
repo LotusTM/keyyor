@@ -1,0 +1,55 @@
+// =============================================================================
+// ^SETTING.RESPONSIVE
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Breakpoints
+// -----------------------------------------------------------------------------
+
+$ekzo-bp-phone:     360px;
+$ekzo-bp-phone-ls:  600px;
+$ekzo-bp-tablet:    720px;
+$ekzo-bp-tablet-ls: 960px;
+$ekzo-bp-lap:       1280px;
+$ekzo-bp-desk:      1600px;
+
+$ekzo-breakpoints: (
+
+  // ----
+  // Sizes
+
+  phone:      'screen and (min-width: #{$ekzo-bp-phone})',
+  phone-ls:   'screen and (min-width: #{$ekzo-bp-phone-ls})',
+  tablet:     'screen and (min-width: #{$ekzo-bp-tablet})',
+  tablet-ls:  'screen and (min-width: #{$ekzo-bp-tablet-ls})',
+  lap:        'screen and (min-width: #{$ekzo-bp-lap})',
+  desk:       'screen and (min-width: #{$ekzo-bp-desk})',
+
+  // ----
+  // Misc
+
+  print:      print,
+  retina:     'screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi)'
+
+);
+
+// -----------------------------------------------------------------------------
+// Responsiveness
+// -----------------------------------------------------------------------------
+
+$ekzo-responsive-helpers-breakpoints: ();
+
+$ekzo-responsive-buttons-breakpoints:              $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-hide-breakpoints:                 $ekzo-responsive-helpers-breakpoints;
+
+$ekzo-responsive-display-helpers-breakpoints:      $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-flex-helpers-breakpoints:         $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-height-helpers-breakpoints:       $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-positioning-helpers-breakpoints:  $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-margin-helpers-breakpoints:       $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-bleed-helpers-breakpoints:        $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-padding-helpers-breakpoints:      $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-typography-helpers-breakpoints:   $ekzo-responsive-helpers-breakpoints;
+$ekzo-responsive-widths-helpers-breakpoints:       $ekzo-responsive-helpers-breakpoints;
+
+$ekzo-responsive-widths-helpers-fractions:         $ekzo-widths-helpers-fractions;

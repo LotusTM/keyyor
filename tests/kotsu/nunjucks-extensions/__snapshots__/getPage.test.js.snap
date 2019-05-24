@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nunjucks global function \`getPage()\` should allow to render $raw data 1`] = `
+"
+      
+      __contextvar value: testing __contextvar value
+    "
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get $raw data 1`] = `
+Object {
+  "props": Object {
+    "var": "__contextvar value: {{ __contextvar }}",
+  },
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from nested Array-based path 1`] = `
+Object {
+  "url": "/blog/2015-10-12-example-article",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from nested dot-notation path 1`] = `
+Object {
+  "url": "/blog/2015-10-12-example-article",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from nested url-like path 1`] = `
+Object {
+  "url": "/blog/2015-10-12-example-article",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from nested url-like path with leading and trailing slash 1`] = `
+Object {
+  "url": "/blog/2015-10-12-example-article",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from nested url-like path with leading slash 1`] = `
+Object {
+  "url": "/blog/2015-10-12-example-article",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from nested url-like path with trailing slash 1`] = `
+Object {
+  "url": "/blog/2015-10-12-example-article",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from root 1`] = `
+Object {
+  "url": "/",
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from root Array-based path 1`] = `
+Object {
+  "2015-10-12-example-article": Object {
+    "props": Object {
+      "url": "/blog/2015-10-12-example-article",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from root string-based path 1`] = `
+Object {
+  "2015-10-12-example-article": Object {
+    "props": Object {
+      "url": "/blog/2015-10-12-example-article",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from root string-based path with leading and trailing slashes 1`] = `
+Object {
+  "2015-10-12-example-article": Object {
+    "props": Object {
+      "url": "/blog/2015-10-12-example-article",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from root string-based path with leading slash 1`] = `
+Object {
+  "2015-10-12-example-article": Object {
+    "props": Object {
+      "url": "/blog/2015-10-12-example-article",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get from root string-based path with trailing slash 1`] = `
+Object {
+  "2015-10-12-example-article": Object {
+    "props": Object {
+      "url": "/blog/2015-10-12-example-article",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get rendered data and ignore current context 1`] = `
+"
+        
+        __contextvar value: 
+      "
+`;
+
+exports[`Nunjucks global function \`getPage()\` should get rendered data with global context 1`] = `"SITE.name value: Test name"`;
+
+exports[`Nunjucks global function \`getPage()\` should get rendered data with global custom functions 1`] = `"Crumbled url: blog"`;

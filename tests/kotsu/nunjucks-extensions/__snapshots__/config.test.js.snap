@@ -1,0 +1,338 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nunjucks global function \`config()\` when value argument not provided should return property value 1`] = `"original value"`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with mixed Object and Array values 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+      "new value1",
+      "new value2",
+      null,
+      "new value3",
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+  "test": "new test value",
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with specified Array 1`] = `
+Array [
+  null,
+  "new value1",
+  "new value2",
+  "new value3",
+  "original value",
+  2,
+  100,
+  Array [
+    "original deep array",
+  ],
+]
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with specified Array with array-based deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      null,
+      "new value1",
+      "new value2",
+      "new value3",
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with specified Array with deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      null,
+      "new value1",
+      "new value2",
+      "new value3",
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with specified Object 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+    "test2": "new nested test2 value",
+  },
+  "test": "new test value",
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with specified Object with array-based deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+        "test2": "new nested test2 value",
+      },
+      "originalValue": "some object original value",
+      "test": "new test value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should merge context property with specified Object with deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+        "test2": "new nested test2 value",
+      },
+      "originalValue": "some object original value",
+      "test": "new test value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context value when setting property value 1`] = `"original value"`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context value when setting property value with array-based deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context value when setting property value with deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context values when merging Array 1`] = `
+Array [
+  "new value1",
+  "new value2",
+  "new value3",
+  "original value",
+  2,
+  100,
+  Array [
+    "original deep array",
+  ],
+]
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context values when merging Array with array-based deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "new value1",
+      "new value2",
+      "new value3",
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context values when merging Array with deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "new value1",
+      "new value2",
+      "new value3",
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context values when merging Object 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context values when merging Object with array-based deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should not override already existing context values when merging Object with deep path 1`] = `
+Object {
+  "some": Object {
+    "array": Array [
+      "original value",
+      2,
+      100,
+      Array [
+        "original deep array",
+      ],
+    ],
+    "object": Object {
+      "nestedOriginalValue": Object {
+        "deepOriginalValue": "deep object original value",
+      },
+      "originalValue": "some object original value",
+    },
+  },
+}
+`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should set in context specified value 1`] = `"test value"`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should set in context specified value with array-based deep path 1`] = `"test array path value"`;
+
+exports[`Nunjucks global function \`config()\` when value argument provided should set in context specified value with deep path 1`] = `"test some path value"`;

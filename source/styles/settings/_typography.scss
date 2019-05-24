@@ -1,0 +1,104 @@
+// =============================================================================
+// ^SETTING.TYPOGRAPHY
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Font sizes
+// -----------------------------------------------------------------------------
+
+// ----
+// Root font size
+// Used for rhythm calculations. Recommended to keep in pxs
+
+$ekzo-font-size: 16px;
+
+// ----
+// Font-size variations
+
+$ekzo-font-sizes: (
+
+  text: (
+    '': $ekzo-font-size, // = .h-text,  .h-font-size,   .h-line-height
+    '-': 14px,            // = .h-text-, .h-font-size-,  .h-line-height-
+    '--': 12px,            // = .h-text--,.h-font-size--, .h-line-height--
+    \+: 18px,            // = .h-text--,.h-font-size--, .h-line-height--
+    \+\+: 24px,            // = .h-text--,.h-font-size--, .h-line-height--
+  ),
+
+  headings: (
+    h1: 36px, // = h1, .h-h1, .h-font-size--h1, .h-line-height--h1
+    h2: 30px, // = h2, .h-h2, .h-font-size--h2, .h-line-height--h2
+    h3: 24px, // = h3, .h-h3, .h-font-size--h3, .h-line-height--h3
+    h4: 21px, // = h4, .h-h4, .h-font-size--h4, .h-line-height--h4
+    h5: 18px, // = h5, .h-h5, .h-font-size--h5, .h-line-height--h5
+    h6: 16px, // = h6, .h-h6, .h-font-size--h6, .h-line-height--h6
+  ),
+
+  extra-headings: (),
+
+  ems: (
+    // '--':     .5em,
+    '-':      ekzo-em(12px),
+    // \+---:    1.25em,
+    \+--:     1.5em,
+    \+:       2em,
+    \+\+:       3em,
+    // \+\+---:  2.25em,
+    // \+\+--:   2.5em,
+    // \+\+:     3em,
+    // \+\+\+:   4em,
+    // \+\+\+\+: 5em
+  ),
+
+  buttons: (), // = .o-btn{{key}}
+
+);
+
+// ----
+// UI font sizes
+
+$ekzo-forms-font-size:              $ekzo-font-size;
+$ekzo-forms-placeholder-font-size:  $ekzo-forms-font-size;
+
+$ekzo-code-font-size:               90%;
+$ekzo-kbd-font-size:                90%;
+
+// -----------------------------------------------------------------------------
+// Line heights
+// -----------------------------------------------------------------------------
+
+$ekzo-line-heights: (
+  '': $ekzo-font-size * 1.5,
+);
+
+// -----------------------------------------------------------------------------
+// Font famylies
+// -----------------------------------------------------------------------------
+
+$ekzo-font-families: (
+  base: unquote('Arial, #{$ekzo-helvetica-font-stack}'),
+  monospace: unquote('Consolas, #{$ekzo-consolas-font-stack}')
+);
+
+$ekzo-ui-font-families: (
+  text:           ekzo-font-family(base),
+
+  headings:       false,
+  extra-headings: false,
+
+  forms:          inherit,
+
+  code:           ekzo-font-family(monospace),
+  kbd:            ekzo-font-family(monospace)
+);
+
+// -----------------------------------------------------------------------------
+// Font weights and styles
+// -----------------------------------------------------------------------------
+
+$ekzo-font-weight:                  normal;
+
+$ekzo-headings-font-weight:         inherit;
+$ekzo-extra-headings-font-weight:   inherit;
+
+$ekzo-forms-placeholder-font-style: inherit;

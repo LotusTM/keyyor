@@ -1,0 +1,98 @@
+aliases:
+  - &node
+    - image: circleci/node:10
+  - &aws-cli
+    - image: lotustm/aws-cli
+
+  - &checkout-submodules
+      name: Checkout submodules
+      command: git submodule update --init --recursive
+
+  - &save-repo-cache
+      key: repo-cache-{{ .Environment.CIRCLE_SHA1 }}
+      paths:
+        - ~/project
+
+  - &restore-repo-cache
+      key: repo-cache-{{ .Environment.CIRCLE_SHA1 }}
+
+  - &save-npm-cache
+      key: npm-cache-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+      paths:
+        - ./node_modules
+
+  - &restore-npm-cache
+      keys:
+        - npm-cache-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+
+  - &save-build-cache
+      key: build-cache-{{ .Environment.CIRCLE_SHA1 }}
+      paths:
+        - ./build
+
+  - &restore-build-cache
+      key: build-cache-{{ .Environment.CIRCLE_SHA1 }}
+
+  - &install-npm
+      name: Install latest version of npm
+      command: sudo npm install -g npm@latest
+
+version: 2
+jobs:
+  checkout:
+    machine: true
+    steps:
+      - checkout
+      - run: *checkout-submodules
+      - save_cache: *save-repo-cache
+
+  setup:
+    docker: *node
+    steps:
+      - run: *install-npm
+      - restore_cache: *restore-repo-cache
+      - run: npm ci
+      - save_cache: *save-npm-cache
+
+  test:
+    docker: *node
+    steps:
+      - restore_cache: *restore-repo-cache
+      - restore_cache: *restore-npm-cache
+      # Avoid eating up all memory for large sets of tests
+      # @see https://discuss.circleci.com/t/memory-problems-with-jest-and-workers/10297/3
+      - run: npm run test -- --maxWorkers=2
+
+  build:
+    docker: *node
+    environment:
+      PRODUCTION: true
+    steps:
+      - restore_cache: *restore-repo-cache
+      - restore_cache: *restore-npm-cache
+      - run: npm run build
+      - save_cache: *save-build-cache
+
+  deploy-to-production:
+    docker: *aws-cli
+    environment:
+      PRODUCTION: true
+    steps:
+      - restore_cache: *restore-repo-cache
+      - restore_cache: *restore-build-cache
+      - deploy: *deploy-to-production
+
+workflows:
+  version: 2
+  test-build-deploy:
+    jobs:
+      - checkout
+      - setup:
+          requires:
+            - checkout
+      - test:
+          requires:
+            - setup
+      - build:
+          requires:
+            - setup

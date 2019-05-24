@@ -1,0 +1,31 @@
+{##
+ # Generate Google 'global site tag' (gtag.js)
+ #
+ # @param {string} UAId Google Analytics ID
+ #
+ # @return {string} `<script>` tags with gtag code
+ #
+ # @example {{ gtag(UAId = 'UA-XXXXX-X') }}
+ #}
+{% macro GoogleGlobalTag(UAId) %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ UAId }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments) }
+  gtag('js', new Date());
+
+  gtag('set', {
+    custom_map: {
+      dimension1: 'dim_user_id',
+      dimension2: 'dim_app_version'
+    },
+    // @todo Disabled because it will make GA ignore reports
+    //       https://issuetracker.google.com/u/1/issues/35353026
+    //       https://stackoverflow.com/questions/36508241/how-do-i-set-appversion-for-google-analytics-event-tracking
+    // app_version: '{{ SITE.version }}',
+    dim_app_version: '{{ SITE.version }}'
+  });
+
+  gtag('config', '{{ UAId }}');
+</script>
+{% endmacro %}

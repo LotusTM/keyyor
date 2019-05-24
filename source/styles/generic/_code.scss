@@ -1,0 +1,36 @@
+// stylelint-disable selector-max-type
+
+// =============================================================================
+// ^CODE
+// =============================================================================
+
+$theme: (
+  base: (
+    color: ekzo-shade(ekzo-color('black'), 10),
+    bg-color: rgba(ekzo-color('black'), .1),
+  )
+);
+
+pre,
+code {
+  @include ekzo-theme($theme) {
+    color: ekzo-theme(color);
+    background-color: ekzo-theme(bg-color);
+  }
+
+  border-radius: ekzo-border-radius('');
+}
+
+code {
+  padding-left: ekzo-em(ekzo-space(.25));
+  padding-right: ekzo-em(ekzo-space(.25));
+  padding-top: ekzo-em(ekzo-space(.25) / 2);
+  padding-bottom: ekzo-em(ekzo-space(.25) / 2);
+}
+
+pre {
+  padding: ekzo-em(ekzo-space(.25));
+
+  code { @include ekzo-theme() { background-color: transparent; } }
+
+}

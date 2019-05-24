@@ -1,0 +1,74 @@
+// stylelint-disable selector-max-type
+
+.Table {
+  border-collapse: separate;
+  border-spacing: 0 1px;
+
+  th {
+    @extend .h-text--;
+
+    font-weight: lighter;
+    opacity: .8;
+
+    padding-bottom: ekzo-space(.25);
+  }
+
+  td {
+    padding-top: ekzo-space(.5);
+    padding-bottom: ekzo-space(.5);
+  }
+
+  th,
+  td {
+    padding-left: ekzo-space(.25);
+    padding-right: ekzo-space(.25);
+
+    &:not(.is-visible) {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &:first-child { padding-left: ekzo-space(.75); }
+    &:last-child { padding-left: ekzo-space(.75); }
+
+  }
+
+  tbody {
+
+    tr {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .068);
+      border-radius: 4px;
+
+      &:hover { background-color: rgba(ekzo-color(melrose), .1); }
+
+    }
+
+  }
+
+  a { text-decoration: none; }
+
+}
+
+  .Table__numerical {
+    font-family: ekzo-font-family(monospace);
+    text-align: right;
+  }
+
+  .Table__compact { @extend .h-text-; }
+
+// For Vue `transition-group`
+// @exmaple
+//   <transition-group name='Table' tag='tbody'>
+//     {this.tasks.map((t) => <TasksRow key={t.id} task={t} />)}
+//   </transition-group>
+
+.Table-enter-active,
+.Table-leave-active { transition: all 1s; }
+
+.Table-enter,
+.Table-leave-to { opacity: 0; }
+
+.Table-enter { transform: translateX(-30px); }
+.Table-leave-to { transform: translateX(30px); }

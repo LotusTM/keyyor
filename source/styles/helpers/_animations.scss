@@ -1,0 +1,17 @@
+// stylelint-disable declaration-no-important
+
+// =============================================================================
+// ^ANIMATIONS
+// =============================================================================
+
+.#{$ekzo-h-ns}trans--all-,
+%#{$ekzo-h-ns}trans--all- { transition: all .7s ease-in !important; }
+
+.#{$ekzo-h-ns}trans--all,
+%#{$ekzo-h-ns}trans--all { transition: all .4s ease-in !important; }
+
+.#{$ekzo-h-ns}trans--all\+,
+%#{$ekzo-h-ns}trans--all\+ { transition: all .15s ease !important; }
+
+.#{$ekzo-h-ns}trans--all0,
+%#{$ekzo-h-ns}trans--all0 { transition: none !important; }

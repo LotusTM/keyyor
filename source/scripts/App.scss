@@ -1,0 +1,14 @@
+// For Vue `transition`
+
+.App-enter-active { transition: all 1s; }
+
+.App-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.Appear-enter-active,
+.Appear-leave-active { transition: opacity 200ms; }
+
+.Appear-enter,
+.Appear-leave-to { opacity: 0; }

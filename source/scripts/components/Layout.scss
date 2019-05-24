@@ -1,0 +1,215 @@
+$sides-padding: ekzo-space(2);
+
+.Layout-container {
+  @extend .o-panel;
+  @extend .o-panel--max;
+}
+
+  .Bleed-layout {
+    min-width: 900px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: $sides-padding;
+    padding-right: $sides-padding;
+    padding-top: ekzo-space();
+    padding-bottom: ekzo-space();
+  }
+
+  .Layout {
+    @extend .o-panel;
+    @extend .o-panel--max;
+
+    min-width: #{kotsu-data('SITE.minWidth')}px;
+
+    padding-left: $sides-padding;
+    padding-right: $sides-padding;
+    padding-bottom: ekzo-space();
+  }
+
+  .Layout--bleed {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+    .Layout__header {
+      @extend .o-panel__header;
+
+      padding-left: $sides-padding;
+      padding-right: $sides-padding;
+
+      margin-left: - $sides-padding;
+      margin-right: - $sides-padding;
+      margin-bottom: ekzo-space();
+
+      color: ekzo-color('ivory');
+      background-image: ekzo-color('linear-primary');
+
+      z-index: ekzo-z-index(layout-header);
+
+      .Layout--bleed & {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+      }
+
+    }
+
+    .Bleed-layout__content,
+    .Layout__content {
+      @extend .o-panel__body;
+
+      width: 100%;
+      max-width: 1600px;
+
+      margin-left: auto;
+      margin-right: auto;
+
+      .Layout--bleed & {
+        max-width: none;
+
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+    }
+
+.Nav-item {
+  color: rgba(ekzo-color('ivory'), .5);
+  text-decoration: none;
+
+  padding-top: ekzo-space(1.25);
+  padding-bottom: ekzo-space(.75);
+  padding-left: ekzo-space(1.25);
+  padding-right: ekzo-space(1.25);
+
+  border-bottom: 3px solid transparent;
+
+  transition: all .5s;
+
+  @include ekzo-breakpoint(lap) {
+    padding-left: ekzo-space(.5);
+    padding-right: ekzo-space(.5);
+  }
+
+  &.is-active {
+    $offset: 3px;
+
+    padding-top: ekzo-space(1.25) - $offset;
+    padding-bottom: ekzo-space(.75) + $offset;
+
+    color: ekzo-color('ivory');
+    border-bottom-color: ekzo-color('ivory');
+  }
+
+  &:hover,
+  &:focus { color: ekzo-color('ivory'); }
+}
+
+  .Nav-item__badge {
+    padding-top: .3em;
+    padding-bottom: .3em;
+    padding-left: .5em;
+    padding-right: .5em;
+
+    margin-left: ekzo-space(.25);
+
+    font-family: ekzo-font-family(monospace);
+    text-align: center;
+    line-height: 1;
+    color: ekzo-color('ivory');
+    background-color: ekzo-color(melrose);
+
+    border-radius: 3px;
+  }
+
+  .Nav-side-item {
+    @extend .o-btn;
+
+    cursor: pointer;
+
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: .75em;
+    padding-bottom: .75em;
+
+    background-color: transparent;
+    color: ekzo-color('ivory');
+    opacity: .5;
+    text-decoration: none;
+    line-height: 1;
+
+    transition: all .5s;
+
+    &:not(:disabled) {
+
+      &:hover,
+      &:focus {
+        color: ekzo-color('ivory');
+        opacity: 1;
+      }
+
+    }
+
+    &.is-active {
+      opacity: 1;
+      background-color: rgba(ekzo-color(melrose), .43);
+    }
+
+  }
+
+  .Nav-item-union {
+    display: flex;
+    position: relative;
+  }
+
+    .Nav-item-union__secondary {
+      $size: 1.2em;
+
+      position: absolute;
+      border-radius: 50%;
+
+      width: $size;
+      height: $size;
+
+      bottom: - ($size / 2);
+      left: 50%;
+      transform: translateX(-50%) translateY($size / 2);
+
+      background-color: ekzo-color('ivory');
+      color: ekzo-color('ivory');
+
+      text-align: center;
+      line-height: 1.25;
+      text-decoration: none;
+      font-size: 1.4em;
+
+      transition: all 200ms ease-out;
+
+      opacity: 0;
+
+      &:hover,
+      &:focus,
+      &.is-active { background-color: ekzo-tint(ekzo-color(portage), 60); }
+
+      &:hover,
+      &:focus,
+      &.is-active,
+      .Nav-item-union__main:hover + &,
+      .Nav-item-union__main:focus + & {
+        opacity: 1;
+        color: ekzo-color(portage);
+        transform: translateX(-50%) translateY(0);
+      }
+
+    }
+
+// @todo Fix this that fixed value
+.Fix-me-limit-to-the-content {
+  overflow: hidden;
+  flex-basis: calc(100vh - 75px); // 75px is fixed header height
+}

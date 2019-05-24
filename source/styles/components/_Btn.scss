@@ -1,0 +1,176 @@
+// =============================================================================
+// ^BUTTON
+// =============================================================================
+
+.Btn {
+  $btn-theme: (
+    base: (
+      bg: ekzo-color(linear-primary),
+      hover-bg: ekzo-color(primary)
+    )
+  );
+
+  @include ekzo-theme($btn-theme) {
+    background-image: ekzo-theme('bg');
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+  }
+
+  @extend .#{$ekzo-o-ns}btn;
+
+  padding-top: ekzo-em(ekzo-space(.5));
+  padding-bottom: ekzo-em(ekzo-space(.5));
+  padding-right: 1em;
+  padding-left: 1em;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  // Remove browsers' focus styling. Focused state
+  // will be displayed based on custom styles below
+  &:focus { outline: 0; }
+
+  &:disabled {
+    opacity: .5;
+
+    background-color: #b3c0d0;
+    background-image: none;
+
+    cursor: default;
+  }
+
+  &:not(:disabled) {
+
+    &:hover,
+    &:focus {
+      @include ekzo-theme($btn-theme) {
+        background-color: ekzo-theme(hover-bg);
+        background-image: none;
+      }
+    }
+
+  }
+
+}
+
+  .Btn--shamrock {
+    $btn-shamrock-theme: (
+      base: (
+        bg: ekzo-color(linear-shamrock),
+        bg-color: ekzo-color(shamrock)
+      )
+    );
+
+    @include ekzo-theme($btn-shamrock-theme) {
+      background-image: ekzo-theme('bg');
+      background-color: ekzo-theme('bg-color');
+
+      &:not(:disabled) {
+
+        &:hover,
+        &:focus { background-color: ekzo-theme('bg-color'); }
+
+      }
+    }
+  }
+
+  .Btn--ghost {
+    $btn-ghost-theme: (
+      base: (
+        color: ekzo-color(primary),
+        hover-bg: rgba(ekzo-color(primary), .1),
+      ),
+    );
+
+    transition: all .3s ease-out;
+
+    @include ekzo-theme($btn-ghost-theme) {
+      color: ekzo-theme(color);
+      background-color: transparent;
+      background-image: none;
+
+      box-shadow: none;
+
+      &:not(:disabled) {
+
+        &:hover,
+        &:focus { background-color: ekzo-theme(hover-bg); }
+
+      }
+    }
+  }
+
+  .Btn--round { border-radius: 100px; }
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.Sync-btn {}
+
+  .Sync-btn__icon {
+    animation: rotate 1s linear infinite;
+    animation-play-state: paused;
+
+    .Sync-btn.is-syncing & { animation-play-state: running; }
+
+  }
+
+// -----------------------------------------------------------------------------
+// Sizes
+// -----------------------------------------------------------------------------
+
+@mixin ekzo-buttons-sizes ($postfix: '') {
+
+  .Btn--#{$postfix} {
+    padding-top:     0;
+    padding-bottom:  0;
+    padding-right:  .6em;
+    padding-left:   .6em;
+  }
+
+  .Btn-#{$postfix} {
+    padding-top:    ekzo-em(ekzo-space(.5) / 3);
+    padding-bottom: ekzo-em(ekzo-space(.5) / 3);
+    padding-right:  .8em;
+    padding-left:   .8em;
+  }
+
+  .Btn\+#{$postfix} {
+    padding-top:    ekzo-em(ekzo-space(1) * .84);
+    padding-bottom: ekzo-em(ekzo-space(1) * .84);
+    padding-right:  1.5em;
+    padding-left:   1.5em;
+  }
+
+  .Btn\+\+#{$postfix} {
+    padding-top:    ekzo-em(ekzo-space(1) * 1.17);
+    padding-bottom: ekzo-em(ekzo-space(1) * 1.17);
+    padding-right:  2em;
+    padding-left:   2em;
+  }
+
+  // ----
+  // Wide version of button
+
+  .Btn--wide--#{$postfix} {
+    padding-right: 1.5em;
+    padding-left:  1.5em;
+  }
+
+  .Btn--wide#{$postfix} {
+    padding-right: 2em;
+    padding-left:  2em;
+  }
+
+  .Btn--wide\+\+#{$postfix} {
+    padding-right: 4em;
+    padding-left:  4em;
+  }
+
+}
+
+@include ekzo-for-each-breakpoint($matches: $ekzo-responsive-buttons-breakpoints, $include-self: true) {
+  @include ekzo-buttons-sizes($postfix: ekzo-temp());
+}

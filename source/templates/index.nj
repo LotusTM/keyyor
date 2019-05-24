@@ -1,0 +1,17 @@
+---
+url: /
+
+title: '%(appName)s'
+
+description: '%(appDescription)s'
+---
+
+{% extends '_layouts/_base.nj' %}
+
+{% block body %}
+<noscript>
+  Для работы сервиса необходимо включить JavaScript и перезагрузить страницу.
+  <a href='https://www.enable-javascript.com/ru/' target='_blank' rel='noopener nofollow'>Как включить JavaScript</a>
+</noscript>
+<div id='app'></div>
+{% endblock %}

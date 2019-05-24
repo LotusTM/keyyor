@@ -1,0 +1,60 @@
+@import './framework';
+
+// =============================================================================
+// ^SETTING.OPTIONS
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Varations
+// -----------------------------------------------------------------------------
+
+$ekzo-margin-helpers-variations: (
+  '--': ekzo-space(.5),
+  '': ekzo-space(1),
+  \+--: ekzo-space(1.5),
+  \+: ekzo-space(2),
+  \+\+: ekzo-space(3),
+  '0': 0
+);
+
+$ekzo-bleed-helpers-variations: (
+  '--': - ekzo-space(.5),
+  '': - ekzo-space(1),
+  \+: - ekzo-space(2),
+  \+\+: - ekzo-space(3),
+);
+
+$ekzo-padding-helpers-variations: (
+  '---': ekzo-space(.25),
+  '--': ekzo-space(.5),
+  '': ekzo-space(1),
+  \+--: ekzo-space(1.5),
+  \+: ekzo-space(2),
+  '0': 0
+);
+
+$ekzo-widths-helpers-fractions: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+
+// -----------------------------------------------------------------------------
+// Theming
+// -----------------------------------------------------------------------------
+
+$ekzo-enable-theming:               true;
+$ekzo-alert-on-missing-theme-color: false;
+
+// -----------------------------------------------------------------------------
+// Border-box
+// -----------------------------------------------------------------------------
+
+$ekzo-global-border-box: true;
+
+// -----------------------------------------------------------------------------
+// A11y
+// -----------------------------------------------------------------------------
+// @note Please, disable it only if your links and forms have prominent `:focus` style,
+//       otherwise people with limited capabilities and keyboard-only won't be able
+//       to use your website at all
+
+$ekzo-disable-links-outline: false;
+$ekzo-disable-forms-outline: false;
+$ekzo-disable-btn-outline:   false;

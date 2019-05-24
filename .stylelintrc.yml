@@ -1,0 +1,262 @@
+---
+plugins:
+  - stylelint-scss
+
+extends: stylelint-config-standard
+
+rules:
+  rule-empty-line-before:
+    - always-multi-line
+    - ignore:
+      - after-comment
+
+  # Issues
+  # ------
+  # Disabled rules due to various issues
+
+  # @todo https://github.com/stylelint/stylelint/issues/2759
+  block-closing-brace-empty-line-before: null
+
+  # @todo No way to provide `at least single space` for aligned groups
+  #                      \/ - here
+  #       .margin-bottom  { margin-bottom: $s-blog-post-spacing; }
+  #       .margin-top     { margin-top: $s-blog-post-spacing; }
+  #       .margin-top\+   { margin-top: $s-blog-post-spacing * 2; }
+  #       .margin-top\+\+ { margin-top: $s-blog-post-spacing * 3; }
+  block-opening-brace-space-before: null
+
+  # @todo No way to provide `at least single space` for aligned groups
+  #                                                            \/ - here
+  #       .margin-bottom  { margin-bottom: $s-blog-post-spacing !important; }
+  #       .margin-top     { margin-top: $s-blog-post-spacing    !important; }
+  declaration-bang-space-before: null
+
+  # @todo No way to provide `at least single space` for aligned groups
+  #                     \/ - here
+  #       padding-top:    21px;
+  #       padding-bottom: 31px;
+  #       padding-right:  10px;
+  #       padding-left:   10px;
+  declaration-colon-space-after: null
+
+  # @todo Overrides standard rule only because it doesn't allow to group properties
+  #       (does not specifies `ignore: after-declaration`)
+  declaration-empty-line-before:
+    - always
+    - except:
+      - first-nested
+      ignore:
+        - after-comment
+        - after-declaration
+        - inside-single-line-block
+
+  # @todo Doesn't support BEM-like indentation
+  #      .test { display: flex; }
+  #        .test__item { box-sizing: border-box; } <- will yeild an error about wrong indentation
+  # @todo Has issues with comment inside Sass maps
+  #       This will say that test1 and everything beyond have wrong indentation
+  #       $map: (
+  #         test1: (
+  #           val1:  12px, // comment
+  #           val2: 10px // comment
+  #         ),
+  #         test2: (
+  #           val1: 36px, // comment
+  #           val2: 30px // comment
+  #         )
+  #       );
+  indentation: null
+
+  # @todo https://github.com/stylelint/stylelint/issues/2761
+  block-opening-brace-newline-after: null
+  block-closing-brace-newline-before: null
+  block-opening-brace-space-after: null
+
+  # Disableed, since it is checked by `scss/at-rule-no-unknown` rule
+  at-rule-no-unknown: null
+
+  # Overrides standard rule to enable gouping of at-rules, when in standard rules
+  # at-rules always should follow each other
+  at-rule-empty-line-before:
+    - always
+    - except:
+      - first-nested
+      ignore:
+        - blockless-after-same-name-blockless
+        - after-comment
+
+  at-rule-semicolon-space-before: 'never'
+
+  # @todo Excepts `Hz` and `kHz` units to be `hz` and `khz` which isn't correct.
+  unit-case: null
+  unit-no-unknown: null
+
+  # @todo https://github.com/stylelint/stylelint/issues/2760
+  # declaration-colon-newline-after: 'always-multi-line'
+
+  # Standard overrides
+  # ------------------
+
+  block-no-empty: null
+  function-max-empty-lines: 1
+  no-missing-end-of-source-newline: null
+  selector-pseudo-element-colon-notation: single
+  number-leading-zero: never
+
+  # Additions
+  # ---------
+
+  color-named: never
+  font-family-name-quotes: always-where-required
+  function-url-quotes: always
+  selector-attribute-quotes: always
+  string-quotes: single
+  at-rule-no-vendor-prefix: true
+  media-feature-name-no-vendor-prefix: true
+  property-no-vendor-prefix: true
+  selector-no-vendor-prefix: true
+  value-no-vendor-prefix: true
+  max-nesting-depth:
+    - 3
+    - ignore:
+      - blockless-at-rules
+  selector-max-compound-selectors: 3
+  selector-max-specificity: 0,3,0
+  declaration-no-important: true
+  value-list-max-empty-lines: 1
+  selector-max-id: 0
+  # @todo No way to qualifying by speicifc classes or attributes
+  selector-no-qualifying-type: true
+  selector-max-universal: 0
+  declaration-block-no-redundant-longhand-properties: null # harmful rule
+  font-weight-notation: named-where-possible
+  function-url-no-scheme-relative: true
+  # @todo Doesn't allow to specify only non-chained ignoreTypes
+  selector-max-type:
+    - 0
+    - ignoreTypes:
+      - a
+      - li
+      - tr
+      - th
+      - td
+
+  # Accepts:
+  #
+  # m
+  # main
+  # main-check--modif
+  # main-check__block--modif
+  # M
+  # Main
+  # Main-check\+
+  # Main-check\+-
+  # Main-check--
+  # Main-check--modif
+  # Main-check__block
+  # Main-check__block--modif
+  #
+  # Rejects:
+  #
+  # mainWrong
+  # MainWrong
+  # MainWrong--modif
+  # MainWrong__block
+  # MainWrong___block
+  # MainWrong__block--modif
+  # MainWrong___block--modif
+  # mainWrong--modif
+  # mainWrong__block--modif
+  # mainWrong___block--modif
+  #
+  # main_wrong
+  # main_Wrong
+  # Main_wrong
+  # Main_wrong--modif
+  # Main_wrong__block
+  # Main_wrong___block
+  # Main_wrong__block--modif
+  # Main_wrong___block--modif
+  # main_wrong--modif
+  # main_wrong__block--modif
+  # main_wrong___block--modif
+  selector-class-pattern:
+    - ^([A-Z]?[a-z]*[-]?[a-z0-9\-]*)(\.[a-z0-9\-]*)?(__[a-z0-9]*[-]?[a-z0-9\-]*)?(--[a-z0-9]*[-]?[a-z0-9\-]*)?(\:[a-z]*)*([\\+\-]*?)*$
+    - resolveNestedSelectors: true
+  selector-id-pattern: ^([A-Z]?[a-z]*[-]?[a-z0-9\-]*)(\.[a-z0-9\-]*)?(__[a-z0-9]*[-]?[a-z0-9\-]*)?(--[a-z0-9]*[-]?[a-z0-9\-]*)?(\:[a-z]*)*([\\+\-]*?)*$
+  declaration-block-semicolon-newline-before: never-multi-line
+  function-comma-newline-before: never-multi-line
+  media-query-list-comma-newline-before: never-multi-line
+  no-unknown-animations: true
+  selector-list-comma-newline-before: never-multi-line
+  selector-list-comma-space-after: always-single-line
+  time-min-milliseconds: 100
+  value-keyword-case:
+    - lower
+    - ignoreKeywords:
+      # @todo Wrongly checks values of Sass variables too
+      - Icon--
+      - Sprite--
+  value-list-comma-newline-before: never-multi-line
+  no-duplicate-selectors: true
+  # @todo Have some issues with Sass placeholders:
+  #       `Expected selector "%#{$ekzo-objects-ns}nav > li > a" to come before selector ".#{$ekzo-objects-ns}nav > a"`
+  no-descending-specificity: true
+  selector-max-attribute: 1
+
+  # Scss
+  # ---------
+
+  scss/at-function-pattern: ^([A-Z]?[a-z]*[-]?[a-z0-9\-]*)(\.[a-z0-9\-]*)?(__[a-z0-9]*[-]?[a-z0-9\-]*)?(--[a-z0-9]*[-]?[a-z0-9\-]*)?(\:[a-z]*)*([\\+\-]*?)*$
+  scss/at-mixin-pattern: ^([A-Z]?[a-z]*[-]?[a-z0-9\-]*)(\.[a-z0-9\-]*)?(__[a-z0-9]*[-]?[a-z0-9\-]*)?(--[a-z0-9]*[-]?[a-z0-9\-]*)?(\:[a-z]*)*([\\+\-]*?)*$
+  scss/dollar-variable-pattern: ^([A-Z]?[a-z]*[-]?[a-z0-9\-]*)(\.[a-z0-9\-]*)?(__[a-z0-9]*[-]?[a-z0-9\-]*)?(--[a-z0-9]*[-]?[a-z0-9\-]*)?(\:[a-z]*)*([\\+\-]*?)*$
+
+  # @todo Doesn't work with `#{}` inside selectors
+  #       `Expected %-placeholder "%#{$ekzo-generics-ns}link" to match specified pattern`
+  # scss/percent-placeholder-pattern: ^([A-Z]?[a-z]*[-]?[a-z0-9\-]*)(\.[a-z0-9\-]*)?(__[a-z0-9]*[-]?[a-z0-9\-]*)?(--[a-z0-9]*[-]?[a-z0-9\-]*)?(\:[a-z]*)*([\\+\-]*?)*$
+
+  scss/at-import-no-partial-leading-underscore: true
+  scss/at-import-partial-extension-blacklist:
+    - scss
+  scss/at-rule-no-unknown: true
+  scss/at-mixin-argumentless-call-parentheses: always
+  scss/at-else-if-parentheses-space-before: always
+  scss/at-function-parentheses-space-before: always
+  scss/at-mixin-parentheses-space-before: always
+
+  # @todo No way to disallow newlines after colon
+  # scss/dollar-variable-colon-newline-after: never
+
+  # @todo Should be replaced with `always-single-line` when Ekzo v3 will be released
+  scss/dollar-variable-colon-space-after: at-least-one-space
+
+  scss/dollar-variable-colon-space-before: never
+  scss/dollar-variable-no-missing-interpolation: true
+  scss/double-slash-comment-whitespace-inside: always
+  scss/operator-no-newline-after: true
+  scss/operator-no-newline-before: true
+  scss/operator-no-unspaced: true
+  scss/selector-no-redundant-nesting-selector: true
+
+  # Those are unused due to codestyle and setted by `block-closing-brace-newline-after` value
+  # scss/at-else-closing-brace-newline-after:
+  # scss/at-if-closing-brace-newline-after:
+  # scss/at-else-empty-line-before:
+
+
+  # @todo Wrongly reports unneded space after `}` when there is a newlines
+  # scss/at-if-closing-brace-space-after: never-intermediate
+  # scss/at-else-closing-brace-space-after: never-intermediate
+
+  scss/declaration-nested-properties: never
+  scss/declaration-nested-properties-no-divided-groups: true
+
+  # @todo https://github.com/kristerkari/stylelint-scss/issues/105#issuecomment-316117192
+  # scss/dollar-variable-empty-line-before:
+  #   - always
+  #   - except:
+  #     - first-nested
+  #     - after-dollar-variable
+  #     ignore:
+  #       - after-comment
+  #       - inside-single-line-block
