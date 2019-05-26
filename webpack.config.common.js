@@ -11,18 +11,22 @@ module.exports = (env = {}) => {
     target: 'web',
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'source-map' : 'eval-source-map',
+    devServer: {
+      contentBase: './build',
+      historyApiFallback: true,
+      watchContentBase: true
+    },
     module: {
       strictExportPresence: true,
       rules: [
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          use: [{
-            loader: 'babel-loader',
-            options: babelOptions
-          }, {
-            loader: 'ts-loader'
-          }]
+          use: [
+            { loader: 'babel-loader', options: babelOptions },
+            'ts-loader',
+            'vue-jsx-hot-loader'
+          ]
         }, {
           test: /\.m?jsx?$/,
           exclude: /node_modules/,

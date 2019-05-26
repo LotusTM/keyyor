@@ -10,7 +10,8 @@ module.exports = (env = {}) => {
     entry: './source/scripts/main.ts',
     output: {
       path: path.resolve(__dirname, 'build/assets/scripts'),
-      filename: '[name].js'
+      filename: '[name].js',
+      publicPath: '/assets/scripts/'
     },
     optimization: {
       runtimeChunk: 'single',
