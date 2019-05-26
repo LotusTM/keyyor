@@ -14,7 +14,14 @@ module.exports = (env = {}) => {
     devServer: {
       contentBase: './build',
       historyApiFallback: true,
-      watchContentBase: true
+      watchContentBase: true,
+      watchOptions: {
+        ignored: [
+          // We need to way for `.prefixed.css`,
+          '**/*.compiled.css',
+          '**/*.map'
+        ]
+      }
     },
     module: {
       strictExportPresence: true,
