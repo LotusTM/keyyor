@@ -36,6 +36,8 @@ export default () => {
       e.request.method !== 'GET' ||
       !e.request.url.startsWith('http') ||
       e.request.url.includes('browser-sync/socket.io') ||
+      e.request.url.includes('sockjs-node/info') ||
+      e.request.url.includes('wepback') ||
       e.request.url.includes('mc.yandex.ru') ||
       e.request.url.includes('google-analytics.com')
     ) return
@@ -44,8 +46,16 @@ export default () => {
       fetch(e.request.clone())
         .then((response) => update(e.request, response))
         .catch(() => {
-          console.log(`[sw.js] failed to fetch ${e.request.url}, trying cache`)
           return caches.match(e.request)
+            .then((response) => {
+              if (response) console.log(`[sw.js] serving from cache ${e.request.url}`)
+              if (!response) console.log(`[sw.js] no matching cache for ${e.request.url}`)
+              return response
+            })
+            .catch((error) => {
+              console.error(`[sw.js] failed to serve from cache ${e.request.url}`, error)
+              throw error
+            })
         })
     )
   })
