@@ -13,6 +13,7 @@ module.exports = (env = {}) => {
     devtool: isProduction ? 'source-map' : 'eval-source-map',
     devServer: {
       contentBase: './build',
+      overlay: true,
       historyApiFallback: true,
       watchContentBase: true,
       watchOptions: {
