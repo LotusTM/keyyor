@@ -47,6 +47,7 @@ $sides-padding: ekzo-space(2);
       margin-bottom: ekzo-space();
 
       color: ekzo-color('ivory');
+      background-color: ekzo-color('linear-primary-bg');
       background-image: ekzo-color('linear-primary');
 
       z-index: ekzo-z-index(layout-header);
